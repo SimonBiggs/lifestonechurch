@@ -3,13 +3,13 @@ layout: default
 ---
 
 <script type="text/javascript">
-  var sp_data = null;
-  function do_data(json) {
-      sp_data = json.entry;
+  var sheet_data = null;
+  function load_data(json) {
+      sheet_data = json.feed.entry;
   }
   function read_data(parent) {
-      var data = sp_data;
-      var cell = data["gs$cell"];
+      var data = sheet_data;
+      var cell = data[1]["gs$cell"];
       var val = cell["$t"];
       
       parent.append(val)
@@ -17,40 +17,9 @@ layout: default
   $(document).ready(function(){
       read_data($("#welcome_message"));
   });
-$(function() {
-
-    var $allVideos = $("iframe[src^='//player.vimeo.com'], iframe[src^='//www.youtube.com'], object, embed"),
-    $fluidEl = $("figure");
-
-	$allVideos.each(function() {
-
-	  $(this)
-	    // jQuery .data does not work on object/embed elements
-	    .attr('data-aspectRatio', this.height / this.width)
-	    .removeAttr('height')
-	    .removeAttr('width');
-
-	});
-
-	$(window).resize(function() {
-
-	  var newWidth = $fluidEl.width();
-	  $allVideos.each(function() {
-
-	    var $el = $(this);
-	    $el
-	        .width(newWidth)
-	        .height(newWidth * $el.attr('data-aspectRatio'));
-
-	  });
-
-	}).resize();
-
-});
-
 
 </script>
-<script src="https://spreadsheets.google.com/feeds/cells/1f1QHvgeESZ6-Dv-tGunOyrbsG6Fwc1V7BN2i6ffXwBU/1/public/values/R2C1?alt=json-in-script&callback=do_data"></script>
+<script src="https://spreadsheets.google.com/feeds/cells/1f1QHvgeESZ6-Dv-tGunOyrbsG6Fwc1V7BN2i6ffXwBU/1/public/values?alt=json-in-script&callback=load_data"></script>
 
 <div class="container">
 	<div class="row">
