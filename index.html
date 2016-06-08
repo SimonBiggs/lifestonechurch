@@ -23,14 +23,9 @@ layout: default
 
 <div class="container">
 	<div class="row">
-		<a href="visits"></a><img id="youtube-unIIn_1JOAE" /></a>
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/unIIn_1JOAE" frameborder="0" allowfullscreen></iframe>
 	</div>
 </div>
-<script>
-	$(document).ready(function() {
-		loadYoutubeThumbnail('unIIn_1JOAE');
-	});
-</script>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4">
@@ -41,19 +36,9 @@ layout: default
 			<h2>Latest Message</h2>
 			{% for post in site.posts limit:1 %}
 				<div class="latest-sermon">
-					<a href="{{ site.baseurl }}{{ post.url}}">
-						<img id="youtube-{{ post.youtubeId }}" src="{{ site.baseurl }}/assets/images/defaultLatestMessage.gif" alt="{{ video.title }}" />
-						<div class='latest-sermon-text'>
-							<h4>{{ post.title }}</h4>
-							{{ post.verse }}
-						</div>
-					</a>
+
 				</div>
-				<script>
-					$(document).ready(function() {
-						loadYoutubeThumbnail('{{ post.youtubeId }}');
-					});
-				</script>
+
 			{% endfor %}
 		</div>
 		<div class="col-sm-4">
@@ -61,18 +46,3 @@ layout: default
 		</div>
 	</div>
 </div>
-<script>
-function loadYoutubeThumbnail(id){
-	var imageId = "#youtube-";
-	if (id) {
-		var url = "http://img.youtube.com/vi/" + id + "/0.jpg";
-		imageId += id;
-		var imageId = "#youtube-" + id;
-
-		$(imageId).attr('src', url);
-
-	} else {
-		$(imageId).attr('src', '/assets/uploads/pages/benPreaching.jpg');
-	}
-}
-</script>
