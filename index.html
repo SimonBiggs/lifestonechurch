@@ -27,7 +27,9 @@ layout: default
 	function write_data() {
 		for(var i=0; i<fill_ids.length; i++) {
 			var parent = $("#" + fill_ids[i]);
-			parent.append(fill_text[i]);
+			if (parent.length == 1) {
+				parent.append(fill_text[i]);
+			}
 		}
 	}
 	$(document).ready(function(){
