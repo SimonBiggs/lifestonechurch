@@ -42,8 +42,8 @@
 		}
 		function write_data() {
 			for(var i=0; i<fill_ids.length; i++) {
-				var parent = $("#" + fill_ids[i]);
-				if (parent.length == 1) {
+				var parent = $("." + fill_ids[i]);
+				if (parent.length > 0) {
 					parent.append(fill_text[i]);
 				}
 			}
