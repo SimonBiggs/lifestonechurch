@@ -4,6 +4,24 @@ layout: default
 
 {% include slider.html %}
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  var sp_data = null;
+  function do_data(json) {
+      sp_data = json.feed.entry;
+  }
+  function read_data(parent) {
+      var data = sp_data;
+      var cell = data["gs$cell"];
+      var val = cell["$t"];
+      
+      parent.append(val)
+  }
+  $(document).ready(function(){
+      read_data($("#welcome_message"));
+  });
+<script src="https://spreadsheets.google.com/feeds/cells/1f1QHvgeESZ6-Dv-tGunOyrbsG6Fwc1V7BN2i6ffXwBU/1/public/values/R2C1?alt=json-in-script&callback=do_data"</script>
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-1"></div>
@@ -16,7 +34,7 @@ layout: default
 	<div class="row">
 		<div class="col-sm-4">
 			<h2>Welcome!</h2>
-			<p>Hopefully sometime soon this will be a message for Wagga Wagga church of Christ :) <a title="I’m New" href="{{ site.baseurl }}/visit/">visit us</a>!</span></p>
+			<p><div id="welcome_message"></div</p>
 		</div>
 		<div class="col-sm-4">
 			<h2>Latest Message</h2>
