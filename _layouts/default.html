@@ -17,6 +17,43 @@
 
 	<script type='text/javascript' src='{{ site.baseurl }}/bower_components/jquery/dist/jquery.min.js'></script>
 	<script type='text/javascript' src='{{ site.baseurl }}/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+	
+	<script type="text/javascript">
+		var sheet_data = null;
+		var fill_ids = [];
+		var fill_text = [];
+		
+		var url = $(location).attr('href');
+		
+		function load_data(json) {
+			sheet_data = json.feed.entry;
+			
+			for(var i=0; i<sheet_data.length; i++) {
+				var cell = sheet_data[i]["gs$cell"];
+				var val = cell["$t"];
+				
+				if (cell.row == 1) {
+					fill_ids.push(val);
+				} else if (cell.row == 2) {
+					fill_text.push(val);
+				}
+		
+			}
+		}
+		function write_data() {
+			for(var i=0; i<fill_ids.length; i++) {
+				var parent = $("#" + fill_ids[i]);
+				if (parent.length == 1) {
+					parent.append(fill_text[i]);
+				}
+			}
+		}
+		$(document).ready(function(){
+			write_data();
+		});
+	
+	</script>
+	<script src="https://spreadsheets.google.com/feeds/cells/1f1QHvgeESZ6-Dv-tGunOyrbsG6Fwc1V7BN2i6ffXwBU/1/public/values?alt=json-in-script&callback=load_data"></script>
 </head>
 <body>
 	<header>
@@ -51,7 +88,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<p>Copyright ©{{ 'now' | date: "%Y" }} <a href="https://github.com/Mountainview-WebDesign">Mountainview Web Design</a>- hosted by <a href="https://github.com/Mountainview-WebDesign/lifestonechurch">Github Pages</a></p>
+						<p>Copyright ©{{ 'now' | date: "%Y" }} <a href="https://github.com/Mountainview-WebDesign">Mountainview Web Design</a> and Simon Biggs under the MIT license- hosted by <a href="https://github.com/Mountainview-WebDesign/lifestonechurch">Github Pages</a></p>
 					</div>
 				</div>
 			</div>
