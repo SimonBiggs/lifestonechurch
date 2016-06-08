@@ -257,6 +257,11 @@ footer a:hover {
 }
 
 
+.centered div {
+    margin: 0 auto;
+    width: 80%;
+}
+
 
 /* Homepage */
 
